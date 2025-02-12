@@ -1,6 +1,7 @@
 import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
-interface AuthButtonProps {
+interface ButtonProps {
   text: string;
   btnColor:
     | "primary"
@@ -11,20 +12,31 @@ interface AuthButtonProps {
     | "warning"
     | string;
   onClick: () => void;
+  redirectTo?: string;
 }
 
-export default function AuthButton({
+export default function ButtonComponent({
   text,
   btnColor,
   onClick,
-}: AuthButtonProps) {
+  redirectTo,
+}: ButtonProps) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    onClick();
+    if (redirectTo) {
+      navigate(redirectTo);
+    }
+  };
+
   return (
     <Button
       fullWidth
       variant="contained"
       color={btnColor}
       sx={{ marginTop: 2 }}
-      onClick={onClick}
+      onClick={handleClick}
     >
       {text}
     </Button>

@@ -4,9 +4,10 @@ import Button from "../components/Button";
 import Card from "../components/Card";
 import TextInput from "../components/TextInput";
 
-export default function LoginPage() {
+export default function UserRegistrationPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
 
   const handleLogin = () => {
     console.log("Email:", email, "Senha:", password);
@@ -27,6 +28,13 @@ export default function LoginPage() {
         <Card title="Task Manager">
           <form>
             <TextInput
+              label="Nome"
+              type="name"
+              value={name}
+              onChangeValue={(e) => setName(e.target.value)}
+              autocomplete="name"
+            />
+            <TextInput
               label="Email"
               type="email"
               value={email}
@@ -40,13 +48,7 @@ export default function LoginPage() {
               onChangeValue={(e) => setPassword(e.target.value)}
               autocomplete="current-password"
             />
-            <Button text="Entrar" onClick={handleLogin} btnColor="success" />
-            <Button
-              text="Registrar-se"
-              onClick={handleLogin}
-              btnColor="primary"
-              redirectTo="/user-registration"
-            />
+            <Button text="Salvar" onClick={handleLogin} btnColor="success" />
           </form>
         </Card>
       </Box>
