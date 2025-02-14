@@ -8,7 +8,7 @@ export const userAuth = () => {
     const token = localStorage.getItem("token");
 
     if (!token) {
-      navigate("/login");
+      navigate("/");
     }
   }, [navigate]);
 
