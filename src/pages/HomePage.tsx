@@ -14,8 +14,10 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 import { Task } from "../types/Tasks";
+import { userAuth } from "../userAuth";
 
 export default function HomePage() {
+  userAuth();
   const [openAddTaskModal, setOpenAddActivityModal] = useState(false);
   const [openEditTaskModal, setOpenEditActivityModal] = useState(false);
   const [activities, setActivities] = useState<Task[]>([]);
@@ -171,10 +173,6 @@ export default function HomePage() {
                 <MenuItem value="Pendente">Pendente</MenuItem>
                 <MenuItem value="Em Andamento">Em Andamento</MenuItem>
                 <MenuItem value="Concluída">Concluída</MenuItem>
-                <MenuItem value="Atrasada">Atrasada</MenuItem>
-                <MenuItem value="Cancelada">Cancelada</MenuItem>
-                <MenuItem value="Revisão">Revisão</MenuItem>
-                <MenuItem value="Em Espera">Em Espera</MenuItem>
               </Select>
             </FormControl>
           </Box>
@@ -244,10 +242,6 @@ export default function HomePage() {
                   <MenuItem value="Pendente">Pendente</MenuItem>
                   <MenuItem value="Em Andamento">Em Andamento</MenuItem>
                   <MenuItem value="Concluída">Concluída</MenuItem>
-                  <MenuItem value="Atrasada">Atrasada</MenuItem>
-                  <MenuItem value="Cancelada">Cancelada</MenuItem>
-                  <MenuItem value="Revisão">Revisão</MenuItem>
-                  <MenuItem value="Em Espera">Em Espera</MenuItem>
                 </Select>
               </FormControl>
               <Button 
