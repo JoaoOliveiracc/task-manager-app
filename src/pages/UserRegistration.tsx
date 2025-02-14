@@ -3,14 +3,29 @@ import { Box } from "@mui/material";
 import Button from "../components/Button";
 import Card from "../components/Card";
 import TextInput from "../components/TextInput";
+import axios from "axios";
 
 export default function UserRegistrationPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
 
-  const handleLogin = () => {
-    console.log("Email:", email, "Senha:", password);
+  const handleRegistration = async () => {
+    try {
+      const response = await axios.post('http://localhost:3000/auth/register', {
+        name,
+        email,
+        password
+      },{
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      console.log('Novo usuário cadastrado:', response.data);
+    } catch (error) {
+      console.log('Erro ao cadastrar novo usuário:', error);
+    }
   };
 
   return (
@@ -26,7 +41,7 @@ export default function UserRegistrationPage() {
       />
       <Box display="flex" alignItems="center" justifyContent="center" flex="1">
         <Card title="Task Manager">
-          <form>
+          <form onSubmit={(e) => e.preventDefault()}>
             <TextInput
               label="Nome"
               type="name"
@@ -48,7 +63,7 @@ export default function UserRegistrationPage() {
               onChangeValue={(e) => setPassword(e.target.value)}
               autocomplete="current-password"
             />
-            <Button text="Salvar" onClick={handleLogin} btnColor="success" />
+            <Button text="Salvar" onClick={handleRegistration} btnColor="success" />
           </form>
         </Card>
       </Box>

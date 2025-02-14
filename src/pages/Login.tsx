@@ -3,13 +3,24 @@ import { Box } from "@mui/material";
 import Button from "../components/Button";
 import Card from "../components/Card";
 import TextInput from "../components/TextInput";
+import axios from "axios";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = () => {
-    console.log("Email:", email, "Senha:", password);
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post('http:localhost:3000/auth/login', {
+        email,
+        password
+      },{
+        withCredentials: true,
+      });
+      console.log("Login realizado com sucesso:", response.data);
+      localStorage.setItem("token", response.data.access_token);
+    } catch (error) {
+      console.error("Erro ao fazer login:", error);    }
   };
 
   return (
